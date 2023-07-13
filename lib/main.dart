@@ -1,7 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
-/// how many cameras present in a device and also stored the camera details
+/// how many cameras present in a device and also stored the camera details.
 late List<CameraDescription> _cameras;
 
 Future<void> main() async {
