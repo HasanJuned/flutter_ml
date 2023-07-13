@@ -1,7 +1,10 @@
 import 'dart:developer';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+
+late List<CameraDescription> _cameras; // how many cameras present in the device and camera details stored
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -11,6 +14,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  late CameraController cameraController;
+
   XFile? pickedImage;
   String? imageUrl;
   String? fileName;
@@ -45,10 +51,24 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         });
   }
+
+  @override
+  void initState() {
+    super.initState();
+    cameraController = CameraController(_cameras[0], ResolutionPreset.high);
+
+    cameraController.initialize().then((_) {
+      if(!mounted){
+
+      }
+
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      body: CameraPreview(cameraController),
     );
   }
 }
