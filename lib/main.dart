@@ -140,6 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                SizedBox(height: 30,),
                 Stack(
                   children: [
                     ElevatedButton(
@@ -150,8 +151,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: _image != null
                             ? Image.file(
                                 _image!,
-                                width: 335,
-                                height: 495,
+                                width: 300,
+                                height: 300,
                                 fit: BoxFit.fill,
                               )
                             : const SizedBox(
