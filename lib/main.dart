@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -172,8 +170,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Text(
                   result.toString(),
                   textAlign: TextAlign.center,
-                  style:
-                      const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 25, fontWeight: FontWeight.bold),
                 ),
               )
             ],
