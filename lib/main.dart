@@ -101,6 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   doImageLabeling() async {
+    /// convert image file to InputImage file
     InputImage inputImage = InputImage.fromFile(_image!);
 
     final List<ImageLabel> labels = await imageLabeler.processImage(inputImage);
@@ -110,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
       final String name = label.label;
       final int index = label.index;
       final double confidence = label.confidence;
-      result += "$name   ${confidence.toStringAsFixed(2)} \n";
+      result += "$name : ${confidence.toStringAsFixed(2)} \n";
     }
     setState(() {
       result;
@@ -133,48 +134,50 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Stack(
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      imagePickerFunction();
-                    },
-                    child: Container(
-                      child: _image != null
-                          ? Image.file(
-                              _image!,
-                              width: 335,
-                              height: 495,
-                              fit: BoxFit.fill,
-                            )
-                          : const SizedBox(
-                              width: 340,
-                              height: 330,
-                              child: Icon(
-                                Icons.camera_alt,
-                                size: 100,
-                                color: Colors.black,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Stack(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        imagePickerFunction();
+                      },
+                      child: Container(
+                        child: _image != null
+                            ? Image.file(
+                                _image!,
+                                width: 335,
+                                height: 495,
+                                fit: BoxFit.fill,
+                              )
+                            : const SizedBox(
+                                width: 340,
+                                height: 330,
+                                child: Icon(
+                                  Icons.camera_alt,
+                                  size: 100,
+                                  color: Colors.black,
+                                ),
                               ),
-                            ),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Divider(),
-              SizedBox(
-                child: Text(
-                  result.toString(),
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                      fontSize: 25, fontWeight: FontWeight.bold),
+                  ],
                 ),
-              )
-            ],
+                Divider(),
+                SizedBox(
+                  child: Text(
+                    result.toString(),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
